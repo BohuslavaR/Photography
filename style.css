@@ -1,0 +1,177 @@
+/* ==================================================================
+   STYLE.CSS — Photo Gallery (sidebar kategórie + veľká galéria)
+   ------------------------------------------------------------------
+   Obsah:
+     1  Premenné — farby, písmo
+     2  Reset, layout (sidebar + main)
+     3  Sidebar — logo, kategórie, sociálne ikony
+     4  Galéria — masonry mriežka + dlaždice
+     5  Lightbox (zväčšenie fotky)
+     6  Obrázkové placeholdery (img-slot)
+     7  Responzivita
+   ================================================================== */
+
+/* ============================================================
+   1. PREMENNÉ
+   ============================================================ */
+:root{
+  --bg:#121316;
+  --sidebar-bg:#0F1012;
+  --text:#F2F2F2;
+  --muted:#8A8A8E;
+  --line:rgba(242,242,242,0.1);
+  --accent:#F2F2F2;
+
+  --font-main: 'Montserrat', 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --sidebar-w: 250px;
+}
+
+/* ============================================================
+   2. RESET, LAYOUT
+   ============================================================ */
+*{margin:0; padding:0; box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--font-main);
+  font-weight:400;
+  color:var(--text);
+  background:var(--bg);
+  line-height:1.5;
+}
+img{max-width:100%; display:block;}
+a{color:inherit; text-decoration:none;}
+button{font-family:inherit;}
+
+.layout{display:flex; min-height:100vh; min-height:100dvh;}
+
+/* ============================================================
+   3. SIDEBAR — logo, kategórie, sociálne ikony
+   ============================================================ */
+.sidebar{
+  width:var(--sidebar-w); flex-shrink:0;
+  background:var(--sidebar-bg);
+  display:flex; flex-direction:column; align-items:center;
+  padding:2.4rem 1.5rem;
+  position:sticky; top:0; height:100vh; height:100dvh;
+}
+.logo-badge{
+  width:56px; height:56px; border-radius:50%;
+  border:1.5px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--font-main); font-weight:600; font-size:1.1rem;
+  margin-bottom:3.5rem; flex-shrink:0;
+}
+.category-nav{list-style:none; display:flex; flex-direction:column; gap:1.3rem; text-align:center; flex:1;}
+.category-btn{
+  background:none; border:none; cursor:pointer;
+  font-family:var(--font-main); font-weight:500; font-size:0.92rem;
+  color:var(--muted); letter-spacing:0.01em; padding:2px 0;
+  transition:color .2s;
+}
+.category-btn:hover{color:var(--text);}
+.category-btn.active{color:var(--text); font-weight:600;}
+
+.sidebar-social{display:flex; gap:1rem; margin-top:2rem; flex-shrink:0;}
+.sidebar-social a{
+  width:32px; height:32px; border-radius:50%; border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--muted); transition:color .2s, border-color .2s;
+}
+.sidebar-social a:hover{color:var(--text); border-color:var(--text);}
+.sidebar-social svg{width:14px; height:14px;}
+
+.sidebar-toggle{
+  display:none; position:fixed; top:16px; left:16px; z-index:70;
+  width:44px; height:44px; border-radius:50%; background:var(--sidebar-bg);
+  border:1px solid var(--line); color:var(--text); font-size:1.3rem; cursor:pointer;
+  align-items:center; justify-content:center;
+}
+
+/* ============================================================
+   4. GALÉRIA — masonry mriežka (CSS columns) + dlaždice
+   ============================================================ */
+.gallery-main{flex:1; padding:2.4rem 2rem; min-width:0;}
+.gallery-topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  margin-bottom:1.6rem;
+}
+.gallery-count{font-family:var(--font-main); font-size:0.85rem; color:var(--muted);}
+
+.masonry{
+  columns:4 220px; column-gap:1rem;
+}
+.tile{
+  break-inside:avoid; margin-bottom:1rem; border-radius:6px; overflow:hidden;
+  position:relative; cursor:pointer; background:var(--sidebar-bg);
+}
+.tile[hidden]{display:none;}
+.tile img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease;}
+.tile:hover img{transform:scale(1.04);}
+.tile-overlay{
+  position:absolute; inset:0; opacity:0; transition:opacity .2s;
+  background:linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.55) 100%);
+  display:flex; align-items:flex-end; padding:0.8rem;
+}
+.tile:hover .tile-overlay{opacity:1;}
+.tile-label{
+  font-family:var(--font-main); font-weight:500; font-size:0.78rem; color:#fff;
+  text-transform:uppercase; letter-spacing:0.05em;
+}
+
+/* Rôzne pomery strán dlaždíc, aby galéria pôsobila prirodzene "masonry" */
+.tile.h-tall .img-slot{aspect-ratio:3/4.4;}
+.tile.h-mid  .img-slot{aspect-ratio:3/3.6;}
+.tile.h-short .img-slot{aspect-ratio:3/2.4;}
+.tile.h-square .img-slot{aspect-ratio:1/1;}
+
+/* ============================================================
+   5. LIGHTBOX
+   ============================================================ */
+.lightbox{
+  position:fixed; inset:0; z-index:100; background:rgba(8,8,9,0.94);
+  display:none; align-items:center; justify-content:center; padding:4vh 4vw;
+}
+.lightbox.open{display:flex;}
+.lightbox-inner{position:relative; max-width:min(90vw,1000px); max-height:88vh;}
+.lightbox-inner img{max-width:min(90vw,1000px); max-height:88vh; width:auto; height:auto; border-radius:6px; display:block;}
+.lightbox-close{
+  position:absolute; top:-40px; right:0; background:none; border:none;
+  color:var(--text); font-size:1.8rem; cursor:pointer; line-height:1;
+}
+
+/* ============================================================
+   6. OBRÁZKOVÉ PLACEHOLDERY ("img-slot")
+   ============================================================ */
+.img-slot{
+  width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+  overflow:hidden; background:#1B1C1F;
+}
+.img-slot img{width:100%; height:100%; object-fit:cover; display:block;}
+.img-fallback{
+  display:none; align-items:center; justify-content:center; text-align:center;
+  width:100%; height:100%; border:1px dashed var(--line);
+  font-family:var(--font-main); font-weight:600; font-size:0.68rem; letter-spacing:0.04em;
+  color:var(--muted); padding:6px; line-height:1.2;
+}
+
+/* ============================================================
+   7. RESPONZIVITA
+   ============================================================ */
+@media (max-width:1100px){ .masonry{columns:3 200px;} }
+@media (max-width:900px){
+  .layout{flex-direction:column;}
+  .sidebar{
+    position:fixed; top:0; left:0; height:100vh; height:100dvh; z-index:60;
+    width:min(78vw,280px); transform:translateX(-100%); transition:transform .3s;
+    box-shadow:10px 0 30px rgba(0,0,0,0.4);
+  }
+  .sidebar.open{transform:translateX(0);}
+  .sidebar-toggle{display:flex;}
+  .gallery-main{padding:5rem 1.4rem 2rem;}
+  .masonry{columns:2 180px;}
+}
+@media (max-width:520px){
+  .masonry{columns:2 140px; column-gap:0.7rem;}
+  .tile{margin-bottom:0.7rem;}
+  .gallery-main{padding:4.5rem 1rem 2rem;}
+}

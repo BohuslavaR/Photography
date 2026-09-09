@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#121316">
+<title>Photo Gallery</title>
+<meta name="description" content="Photography portfolio — categories on the left, full gallery on the right.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="script.js" defer></script>
+</head>
+<body>
+
+  <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Open categories">☰</button>
+
+  <div class="layout">
+
+    <!-- ============================================================
+         SIDEBAR 
+         ============================================================ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="logo-badge">BR</div>
+
+      <ul class="category-nav" id="category-nav">
+        <li><button class="category-btn active" data-filter="all">Show All</button></li>
+        <li><button class="category-btn" data-filter="automotive">Automotive</button></li>
+        <li><button class="category-btn" data-filter="landscape">Landscape</button></li>
+        <li><button class="category-btn" data-filter="artistic">Artistic</button></li>
+        <li><button class="category-btn" data-filter="bw">Black &amp; White</button></li>
+        <li><button class="category-btn" data-filter="advertising">Advertising</button></li>
+        <li><button class="category-btn" data-filter="editorial">Editorial</button></li>
+        <li><button class="category-btn" data-filter="shelters">Shelters</button></li>
+        <li><button class="category-btn" data-filter="portrait">Portrait</button></li>
+      </ul>
+
+      <div class="sidebar-social">
+       <a href="https://www.instagram.com/brphoto.graphy/" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3.06.01 4.12.06 1.06.05 1.79.22 2.43.47.66.26 1.22.6 1.77 1.16.55.55.9 1.11 1.16 1.77.25.64.42 1.37.47 2.43.05 1.06.06 1.42.06 4.11 0 2.7-.01 3.06-.06 4.12-.05 1.06-.22 1.79-.47 2.43a4.9 4.9 0 0 1-1.16 1.77 4.9 4.9 0 0 1-1.77 1.16c-.64.25-1.37.42-2.43.47-1.06.05-1.42.06-4.12.06-2.7 0-3.06-.01-4.12-.06-1.06-.05-1.79-.22-2.43-.47a4.9 4.9 0 0 1-1.77-1.16 4.9 4.9 0 0 1-1.16-1.77c-.25-.64-.42-1.37-.47-2.43C2.01 15.06 2 14.7 2 12c0-2.7.01-3.06.06-4.12.05-1.06.22-1.79.47-2.43.26-.66.6-1.22 1.16-1.77a4.9 4.9 0 0 1 1.77-1.16c.64-.25 1.37-.42 2.43-.47C8.94 2.01 9.3 2 12 2Zm0 1.8c-2.65 0-2.99.01-4.03.06-.97.04-1.5.2-1.85.34-.46.18-.79.4-1.14.75-.35.35-.57.68-.75 1.14-.14.35-.3.88-.34 1.85C3.85 9.01 3.84 9.35 3.84 12c0 2.65.01 2.99.06 4.03.04.97.2 1.5.34 1.85.18.46.4.79.75 1.14.35.35.68.57 1.14.75.35.14.88.3 1.85.34C8.99 20.15 9.35 20.16 12 20.16c2.65 0 2.99-.01 4.03-.06.97-.04 1.5-.2 1.85-.34.46-.18.79-.4 1.14-.75.35-.35.57-.68.75-1.14.14-.35.3-.88.34-1.85.05-1.04.06-1.38.06-4.03 0-2.65-.01-2.99-.06-4.03-.04-.97-.2-1.5-.34-1.85a3.1 3.1 0 0 0-.75-1.14 3.1 3.1 0 0 0-1.14-.75c-.35-.14-.88-.3-1.85-.34C14.99 3.85 14.65 3.84 12 3.84Zm0 3.06a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2Zm0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6Zm5.3-1.99a1.19 1.19 0 1 1-2.38 0 1.19 1.19 0 0 1 2.38 0Z"/></svg></a>
+       <a href="https://www.behance.net/bokarozsypalov" aria-label="Behance"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 6h5.6c2.7 0 3.9 1.3 3.9 3.1 0 1.2-.6 2-1.6 2.5 1.4.4 2.2 1.5 2.2 2.9 0 2.1-1.6 3.5-4.3 3.5H4V6Zm2.5 4.9h2.7c1 0 1.6-.5 1.6-1.3s-.6-1.3-1.6-1.3H6.5v2.6Zm0 5h2.9c1.1 0 1.8-.5 1.8-1.5s-.7-1.5-1.8-1.5H6.5v3Zm9-9h5v1.2h-5V6.9ZM23 14.4c0-3-1.9-5-4.7-5-2.7 0-4.7 2-4.7 5s2 5 4.8 5c2.1 0 3.7-1.1 4.3-2.8h-2.1c-.3.7-1 1.1-2.1 1.1-1.4 0-2.3-.9-2.5-2.3h7v-1Zm-6.9-.9c.2-1.2 1.1-1.9 2.2-1.9 1.2 0 2 .7 2.1 1.9h-4.3Z"/></svg></a>
+      </div>
+    </aside>
+
+    <!-- ============================================================
+         GALLERY — masonry mriežka fotiek
+         ============================================================ -->
+    <main class="gallery-main">
+      <div class="gallery-topbar">
+        <span class="gallery-count" id="gallery-count">18 photos</span>
+      </div>
+
+      <div class="masonry" id="masonry">
+
+        <div class="tile h-tall" data-category="automotive editorial">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987296/IMG_3586-Enhanced-NR12.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 01</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive / Editorial</span></div>
+        </div>
+
+        <div class="tile h-mid" data-category="landscape bw">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987279/IMG_0359.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 02</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Landscape / Black &amp; White</span></div>
+        </div>
+
+         <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987278/BZK08430-2_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 01</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+           <div class="tile h-mid" data-category="bw">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788993203/11.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 02</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Black &amp; White</span></div>
+        </div>
+
+         <div class="tile h-short" data-category="portrait artistic">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788991667/Naty_IV.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 07</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait / Artistic</span></div>
+        </div>
+
+          <div class="tile h-square" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788991651/KAR02007-Enhanced-NR_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 10</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+         <div class="tile h-short" data-category="shelters">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788991661/KAR03034.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 03</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Shelters</span></div>
+        </div>
+        
+        <div class="tile h-short" data-category="shelters">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987301/IMG_4051.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 03</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Shelters</span></div>
+        </div>
+
+        <div class="tile h-tall" data-category="portrait artistic">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987305/IMG_7106.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 04</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait / Artistic</span></div>
+        </div>
+
+        <div class="tile h-mid" data-category="artistic advertising">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987275/BZK00541_-_k%C3%B3pia.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 05</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Artistic / Advertising</span></div>
+        </div>
+
+          <div class="tile h-mid" data-category="artistic">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987330/52E00A03-65B6-44BA-8E27-DC32FF0443D4.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 05</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Artistic</span></div>
+        </div>
+
+        <div class="tile h-short" data-category="portrait artistic">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788991671/Naty.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 07</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait / Artistic</span></div>
+        </div>
+
+          <div class="tile h-mid" data-category="bw">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788993185/IMG_3522.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 02</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Black &amp; White</span></div>
+        </div>
+
+            <div class="tile h-mid" data-category="bw">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788993189/IMG_1616.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 02</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Black &amp; White</span></div>
+        </div>
+
+              <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987285/IMG_1228.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 01</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+
+            <div class="tile h-tall" data-category="automotive artistic">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987440/KAR06832_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 01</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive / Artistic</span></div>
+        </div>
+
+
+        <div class="tile h-square" data-category="shelters">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987451/KAR07798.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 06</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Shelters</span></div>
+        </div>
+
+        <div class="tile h-square" data-category="shelters">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788991637/KAR00973_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 06</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Shelters</span></div>
+        </div>
+
+
+         <div class="tile h-short" data-category="shelters">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788991657/KAR02839_2.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 03</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Shelters</span></div>
+        </div>
+
+        <div class="tile h-short" data-category="portrait advertising">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987343/IMG_0115.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 07</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait / Advertising</span></div>
+        </div>
+
+        <div class="tile h-square" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788991639/KAR01495-Enhanced-NR_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 10</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+        <div class="tile h-mid" data-category="bw">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788991618/300965F8-20C2-43AD-92A9-4C27ED27AE7F.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 02</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Black &amp; White</span></div>
+        </div>
+
+        <div class="tile h-tall" data-category="shelters">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987449/KAR07761.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 08</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Shelters</span></div>
+        </div>
+
+        <div class="tile h-mid" data-category="artistic portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987442/KAR06853_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 09</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Artistic / Portrait</span></div>
+        </div>
+
+        <div class="tile h-square" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987436/KAR03308-Enhanced-NR_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 10</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+        <div class="tile h-tall" data-category="portrait automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987438/KAR03335-Enhanced-NR_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 11</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait / Automotive</span></div>
+        </div>
+
+        <div class="tile h-short" data-category="portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987434/KAR03281-Enhanced-NR_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 12</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait / Automotive</span></div>
+        </div>
+
+            <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987293/IMG_3565-Enhanced-NR_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 01</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+        <div class="tile h-mid" data-category="portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987408/IMG_8746.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 13</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait</span></div>
+        </div>
+
+         <div class="tile h-tall" data-category="shelters">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788991643/KAR01573.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 08</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Shelters</span></div>
+        </div>
+
+        <div class="tile h-tall" data-category="portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987405/IMG_8519-2.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 14</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait</span></div>
+        </div>
+
+        <div class="tile h-square" data-category="portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987387/IMG_6678.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 15</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait</span></div>
+        </div>
+
+        <div class="tile h-mid" data-category="advertising">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987378/IMG_3281.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 16</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Advertising</span></div>
+        </div>
+
+        <div class="tile h-short" data-category="advertising">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987374/IMG_3245.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 17</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Advertising</span></div>
+        </div>
+
+        <div class="tile h-tall" data-category="advertising">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987362/IMG_2854.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Advertising</span></div>
+        </div>
+
+         <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987314/KAR08465_copy_2.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+         <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987316/KAR09127-Enhanced-NR_copy_2.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+         <div class="tile h-tall" data-category="advertising portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987341/IMG_0089_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Advertising / Portrait</span></div>
+        </div>
+
+         <div class="tile h-tall" data-category="advertising portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987345/IMG_0123_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Advertising / Portrait</span></div>
+        </div>
+
+         <div class="tile h-tall" data-category="advertising portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987347/IMG_0135.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Advertising / Portrait</span></div>
+        </div>
+
+          <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987316/KAR09127-Enhanced-NR_copy_2.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+          <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987309/KAR07598-Enhanced-NR_coppy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+          <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987318/KTM_I.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+          <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987310/KAR07879-Enhanced-NR_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+          <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987312/KAR08377_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+        <div class="tile h-tall" data-category="portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987360/IMG_2732.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 14</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait</span></div>
+        </div>
+
+        <div class="tile h-tall" data-category="portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987358/IMG_2277.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 14</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait</span></div>
+        </div>
+
+        <div class="tile h-tall" data-category="portrait">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987357/IMG_2214.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 14</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Portrait</span></div>
+        </div>
+
+           <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987287/IMG_2148.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+           <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788991625/BZK06306_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+           <div class="tile h-tall" data-category="automotive">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987312/KAR08377_copy.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Automotive</span></div>
+        </div>
+
+           <div class="tile h-tall" data-category="landscape">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987289/IMG_2229.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Landscape</span></div>
+        </div>
+
+           <div class="tile h-tall" data-category="landscape">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987299/IMG_3773.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Landscape</span></div>
+        </div>
+
+           <div class="tile h-tall" data-category="landscape">
+          <div class="img-slot">
+            <img src="https://res.cloudinary.com/livyisn3/image/upload/v1788987297/IMG_3771.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <span class="img-fallback">IMG 18</span>
+          </div>
+          <div class="tile-overlay"><span class="tile-label">Landscape</span></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ============================================================
+       LIGHTBOX
+       ============================================================ -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+      <div id="lightbox-content"></div>
+    </div>
+  </div>
+
+</body>
+</html>
